@@ -1,0 +1,63 @@
+syntax = "proto2";
+package com.ttg.gamecore.proto;
+option java_package = "com.ttg.gamecore.proto";
+option java_outer_classname = "MsgProto";
+import "file/Base.proto";
+option java_multiple_files = true;
+
+
+enum MsgType {
+  MsgDefault = 0;
+  ReqType = 1;
+  ResType = 2;
+  NotifyType = 3;
+  SubType = 4;
+}
+
+message Msg {
+  required int32 msgType = 1;  //消息类型 1请求 2回应 3通知
+  required int32 service = 2;  //服务id
+  required int32 msgId = 3;     //消息id
+
+
+  optional People people = 4; //用户 req 的时候是发送者 res的时候是返回用户 notify 单个用户的时候是单个用户
+  optional bytes data = 5; //数据
+  optional string topic = 6; //notify 群组的时候使用
+
+//  optional Notify notify = 6;   //通知消息体
+//  optional Sub sub = 7;         //订阅消息体
+}
+
+
+//请求订阅消息体
+message SubReq {
+//  required People user = 1;   //发送消息的用户
+  required int32 style = 1;     //1订阅 2取消订阅
+  required string topic = 2;     //订阅或者取消订阅的主题
+}
+
+//请求订阅消息体
+message SubRes {
+  //  required People user = 1;   //发送消息的用户
+  required int32 style = 1;     //1订阅 2取消订阅
+  required string topic = 2;     //订阅或者取消订阅的主题
+}
+
+
+message Notify {
+  required int32 sendType = 1; //发送消息类型 1针对单个用户 2多个用户 3标签用户 4所有用户
+  optional People user = 2;       //针对单个用户的时候使用
+  repeated People users = 3;   //针对多个用户的时候使用
+  repeated string topic = 4;   //针对标签用户使用
+  required bytes data = 5;     //消息
+}
+
+
+//message Req {
+//  optional bytes data = 2;     //消息
+//}
+//
+//message Res {
+//  required People user = 1;   //返回给响应消息的用户
+//  required bytes data = 2;     //消息
+//}

@@ -1,0 +1,1767 @@
+{
+	"info": {
+		"_postman_id": "c4ec6ecb-c8a1-45b1-8f86-d68a17468e11",
+		"name": "ttg-h5用户",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "31887208"
+	},
+	"item": [
+		{
+			"name": "基础",
+			"item": [
+				{
+					"name": "用户登陆",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{merchant_token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "device",
+								"value": "{{user_device}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"account\": \"{{user_account}}\",\n    \"loginStyle\": 0,\n    \"device\": \"{{user_device}}\",\n    \"password\": \"{{user_password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/login"
+					},
+					"response": []
+				},
+				{
+					"name": "用户详情",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    // \"uid\": 12\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/info"
+					},
+					"response": []
+				},
+				{
+					"name": "银行卡列表",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uid\": 1,\n    \"page\": 1,\n    \"limit\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/finance/bankList"
+					},
+					"response": []
+				},
+				{
+					"name": "银行卡创建",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"account\": \"87943534346\",\n    \"address\": \"第一路\",\n    \"accountName\": \"user_real_name1\",\n    \"bankConfig\": {\n        \"country\": 16,\n        \"config\": {\n    // \"ifsc\": \"hfuew1\",\n            \"name\": \"xiaoyi\",\n            \"style\": 1,\n            \"account\": \"87943534346\",\n            \"bindPhone\": \"1312233244\"\n        }\n    },\n    \"remark\": \"第一张银行卡\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/finance/bankCreate"
+					},
+					"response": []
+				},
+				{
+					"name": "加密货币创建",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": 1,\n    \"cryptoStyle\": 1,\n    \"cryptoBlockchainStyle\": 1,\n    \"address\": \"oxifoerjrtnfweew\",\n    \"config\": \"{}\",\n    \"remark\": \"第一张银行卡\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/finance/cryptoCreate"
+					},
+					"response": []
+				},
+				{
+					"name": "加密货币列表",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"page\": 1,\n    \"limit\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/finance/cryptoList"
+					},
+					"response": []
+				},
+				{
+					"name": "充值",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"thirdId\": 1,\n    \"thirdStyle\": 1,\n    \"chargeStyle\": \"USDT\",\n    \"currencyStyle\": \"IDR\",\n    \"amount\": 200\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/finance/createCharge"
+					},
+					"response": []
+				},
+				{
+					"name": "用户注册",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "host",
+								"value": "{{merchant_host}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "token",
+								"value": "{{merchant_token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "device",
+								"value": "{{user_device}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "CustomHost",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"account\": \"hurry123@qq.com\",\n    \"password\": \"abc123456\",\n    // \"passAgain\": \"xiaoli102\",\n    // \"inviteCode\": \"7869616f6c69313031\",\n    // \"agentId\": 0,\n    \"device\": \"frhiwrew\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/register"
+					},
+					"response": []
+				},
+				{
+					"name": "发送验证码",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							},
+							{
+								"key": "device",
+								"value": "{{user_device}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"scene\": 1,\n    \"style\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/sendVerifyCode"
+					},
+					"response": []
+				},
+				{
+					"name": "用户注册-test",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "CustomHost",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{merchant_token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "device",
+								"value": "{{user_device}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"account\": \"user8\",\n    \"password\": \"12345678\",\n    \"passAgain\": \"12345678\"\n    // ,\n    // \"inviteCode\": \"7869616f6c69313032\"\n    // ,\n    // \"agentId\": 0\n    // ,\n    // \"device\": \"frhiwrew\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/register"
+					},
+					"response": []
+				},
+				{
+					"name": "聊天_记录_图片文件上传",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{platform_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Customhost",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/sanny/Desktop/show1.png"
+								}
+							]
+						},
+						"url": "{{host_ttg_upload}}/upload/recordFileUpload"
+					},
+					"response": []
+				},
+				{
+					"name": "活动_列表",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    // \"uid\": 12\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/activity/list"
+					},
+					"response": []
+				},
+				{
+					"name": "活动_领取",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"activityId\":2,\n    \"platformActiveId\":2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/activity/activityReceive"
+					},
+					"response": []
+				},
+				{
+					"name": "活动_领取记录",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"page\": 1,\n    \"limit\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/activity/logList"
+					},
+					"response": []
+				},
+				{
+					"name": "vip_列表",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/level/vip"
+					},
+					"response": []
+				},
+				{
+					"name": "文件上传配置_列表",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/fileConfig"
+					},
+					"response": []
+				},
+				{
+					"name": "用户网站配置",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{merchant_token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "device",
+								"value": "{{user_device}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/webConfig"
+					},
+					"response": []
+				},
+				{
+					"name": "用户统计",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							},
+							{
+								"key": "device",
+								"value": "{{user_device}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/userStatics"
+					},
+					"response": []
+				},
+				{
+					"name": "用户钱包",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							},
+							{
+								"key": "device",
+								"value": "{{user_device}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"countryCode\": 16\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/finance/wallet"
+					},
+					"response": []
+				},
+				{
+					"name": "用户vip信息",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    // \"uid\": 12\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/level/vip"
+					},
+					"response": []
+				},
+				{
+					"name": "用户领取vip",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"style\":3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/level/rewardVipGift"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "聊天室",
+			"item": [
+				{
+					"name": "聊天室列表请求",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"page\":1,\n    \"limit\":100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/chatRoomList"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "游戏",
+			"item": [
+				{
+					"name": "游戏类型列表",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uid\": 1,\n    \"page\": 1,\n    \"limit\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/gameStyleList"
+					},
+					"response": []
+				},
+				{
+					"name": "首页banner",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{merchant_token}}",
+								"type": "text"
+							},
+							{
+								"key": "device",
+								"value": "{{user_device}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/bannerList"
+					},
+					"response": []
+				},
+				{
+					"name": "首页游戏列表",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/homeGameList"
+					},
+					"response": []
+				},
+				{
+					"name": "彩票游戏列表",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/lotteryList"
+					},
+					"response": []
+				},
+				{
+					"name": "彩票游戏押注",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//     \"gameId\": 10,\n//     // \"areaStyle\": 2,\n//     // \"betValues\": [0],\n//     \"areaBetList\":{\n//         \"2\": [0],\n//         \"3\": [0,1],\n//         \"4\":[0,1],\n//         \"5\":[0]\n//     },\n//     \"betInterval\": \"20\",\n//     \"issue\": \"202403032\"\n// }   \n{\n    \"gameId\":1,\n    \"betInterval\":\"10\",\n    \"issue\":\"20240405107\",\n    \"areaBetList\":{\n        \"0\": [0,1,2,3,4,5,6,7,8,9],\n        \"1\": [0],\n        \"2\": [0],\n        \"3\": [0]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/bet/lottery"
+					},
+					"response": []
+				},
+				{
+					"name": "游戏押注记录",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"page\": 1,\n    \"limit\": 5,\n    \"gameId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/bet/records"
+					},
+					"response": []
+				},
+				{
+					"name": "彩票开奖记录",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"page\":1,\n    \"limit\":10,\n    \"gameId\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/bet/lotteryHistory"
+					},
+					"response": []
+				},
+				{
+					"name": "进入彩票",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"gameId\": 13\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/user/lotteryEntry"
+					},
+					"response": []
+				},
+				{
+					"name": "老虎机押注",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-real-ip",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-gate-pass",
+								"value": "fewrewfwe",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Host",
+								"value": "{{merchant_host}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//     \"gameId\": 10,\n//     // \"areaStyle\": 2,\n//     // \"betValues\": [0],\n//     \"areaBetList\":{\n//         \"2\": [0],\n//         \"3\": [0,1],\n//         \"4\":[0,1],\n//         \"5\":[0]\n//     },\n//     \"betInterval\": \"20\",\n//     \"issue\": \"202403032\"\n// }   \n{\"gameId\":10,\"betInterval\":\"10\",\"issue\":\"202403032\",\"areaBetList\":{\"2\":[0],\"3\":[0],\"4\":[0]}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host_ttg_gate}}/bet/slot"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "用户枚举-状态",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-real-ip",
+						"value": "127.0.0.1",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "x-gate-pass",
+						"value": "fewrewfwe",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; charset=UTF-8",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "host",
+						"value": "{{merchant_host}}",
+						"type": "text"
+					},
+					{
+						"key": "token",
+						"value": "{{merchant_token}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "device",
+						"value": "{{user_device}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{host_ttg_gate}}/user/enums/status"
+			},
+			"response": []
+		},
+		{
+			"name": "用户枚举-类型",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-real-ip",
+						"value": "127.0.0.1",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "x-gate-pass",
+						"value": "fewrewfwe",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; charset=UTF-8",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "host",
+						"value": "{{merchant_host}}",
+						"type": "text"
+					},
+					{
+						"key": "token",
+						"value": "{{merchant_token}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "device",
+						"value": "{{user_device}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{host_ttg_gate}}/user/enums/code"
+			},
+			"response": []
+		}
+	]
+}

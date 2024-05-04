@@ -1,0 +1,180 @@
+syntax = "proto2";
+package com.ttg.gamecore.proto;
+option java_package = "com.ttg.gamecore.proto";
+option java_outer_classname = "PgGame";
+//import "file/GameBase.proto";
+option java_multiple_files = true;
+
+
+enum PgGameType {
+  //pg 游戏id 牛:12004 兔子:12003 老虎:12007 老鼠:12005
+  ReqPgBetType = 6000;     //pg电子押注请求
+  ResPgBetType = 6001;     //pg电子押注回应
+
+
+  ReqSlotLoginType = 6010;      //登陆请求
+  ResSlotLoginType = 6011;      //登陆回应
+  ReqSlotConfigType = 6020;     //配置请求
+  ResSlotConfigType = 6021;     //配置回应
+  ReqSlotBetType = 6022;        //押注请求
+  ResSlotBetType = 6023;        //押注回应
+  ReqSlotHistoryType = 6024;    //历史请求
+  ResSlotHistoryType = 6025;    //历史回应
+
+
+
+  NotifyEnterPgType = 6070; //pg电子进入通知
+  NotifyPgType = 6071;      //pg电子每秒通知
+
+
+
+}
+
+
+message PgCell {
+  required int32 x = 1;         //行 0开始
+  required int32 y = 2;         //列 0开始
+  required int32 icon = 3;      //图标 0开始 对标文档中的1
+}
+
+message PgGameEnterNtf {
+  required int32 gameCode = 1;      //游戏id
+  required string balance = 2;      //余额
+  repeated PgCell cells = 3;        //游戏初始列表
+}
+
+message PgBetReq {
+  required string betAmount = 1;    //押注金额
+}
+
+message PgBetRes {
+  repeated PgCell cells = 1;        //游戏图标列表
+  required string balance = 2;      //最新余额
+  repeated string winLines = 3;     //领取线路 比如成线 0_0_0 成线 0_1_0 等
+  optional string winRate = 4;      //赢取倍数
+  optional string winAmount = 5;    //赢取金额
+}
+
+
+
+
+
+
+
+
+
+
+//-------------------------- slot game接口
+message SlotPlayer {
+  required string balance = 1;        //余额
+}
+message SlotGameData {
+  required int32 chipsId = 1;        //余额
+}
+message SlotGameInfo {
+  required string cost = 1;        //花费
+  required string win = 2;         //赢取
+  required int64 date = 3;        //时间戳
+  required string transactionld = 4; //交易id
+  required string balance = 5;    //余额
+  required bool triggerSpecialEffects = 6;//是否产生特效
+  repeated SlotElect slotEleList = 7; //特效列表
+  required string totalReward = 8;    //赢取总奖励
+  required string totalMulti = 9;     //赢取总倍数
+  repeated SlotRewardDetail rewardDetails = 10; //奖励详情
+}
+message SlotResultInfo {
+  repeated SlotGameInfo gameInfoList = 1;   //
+}
+
+message SlotElect {
+  required int32  id = 1;//特效id
+  required int32 type = 2;//类型
+  repeated int32 multipleList = 3;//倍率列表
+}
+
+message SlotRewardDetail {
+  required int32 line = 1;
+  required string reward = 2;//奖励
+  required int32 sameCount = 3;   //总结图标量
+  required int32 singleMultiple = 4;//倍数
+  repeated int32 indexHaveList = 5;//总结倍数索引
+}
+
+message SlotChips {
+  required int32 chipsId = 1;
+  required int32 bet = 2;
+  required int32 isShortcut = 3;
+}
+
+message SlotMultiple {
+  /** @format int32 */
+   required int32 tid = 1;
+  /** @format float */
+    required int32 multip = 2;
+}
+
+
+message SlotConfigMeta {
+  repeated int32 betSingleLineList = 1;
+  repeated int32 multiList = 2;
+  repeated SlotChips chips = 3;
+  repeated int32 lines = 4;
+  repeated SlotElect slotEles = 5;
+  repeated int32 winTypeMultis = 6;
+  repeated  SlotMultiple tMultipList = 7;
+}
+
+message SlotHistory {
+  repeated SlotGameInfo gameInfoList = 2;//
+}
+
+
+//TODO 货币 语言 常量
+//玩家登陆请求
+message SlotLoginReq {
+  required string token = 1;        //用户token
+}
+
+message SlotLoginRes {
+  required string token = 1;        //用户token
+  required string uid = 2;          //用户id
+  optional int32 currencyId = 3;    //货币id
+  optional int32 language = 4;      //语言id
+}
+
+
+//配置请求
+message SlotConfigReq {
+
+}
+
+//配置回应
+message SlotConfigRes {
+  required SlotPlayer playerInfo = 1; //玩家信息
+  repeated SlotGameData gameDataList = 2;   //注码id列表
+  required SlotResultInfo lastBetInfo = 3;  //
+  required SlotConfigMeta meta = 4;        //配置元数据
+}
+
+//押注请求
+message SlotBetReq {
+  required int32 chipsId = 1;   //下注id
+}
+
+message SlotBetRes {
+  required SlotPlayer playerInfo = 1;   //用户信息
+  required SlotResultInfo resultInfo = 2;  //押注结果
+}
+
+
+//押注历史
+message SlotHistoryReq {
+  required int64 startTime = 1;       //开始时间戳
+  required int64 endTime = 2;         //结束时间戳
+  required int32 pageIndex = 3;       //页码
+}
+
+message SlotHistoryRes {
+  repeated SlotHistory historyInfoList = 1;//历史信息列表
+}

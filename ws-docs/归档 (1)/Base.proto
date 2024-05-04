@@ -1,0 +1,21 @@
+syntax = "proto2";
+package com.ttg.gamecore.proto;
+option java_package = "com.ttg.gamecore.proto";
+option java_outer_classname = "Base";
+option java_multiple_files = true;
+
+
+enum ServiceType {
+  Websocket = 0;  //ws 网关类型
+  Message = 1;    //聊天室类型
+  Slots = 2;      //电子游戏
+
+}
+
+message People {
+  required int32 uid = 1;
+  required string merchant = 2;
+  required string name = 3;   //名字
+  required string avatar = 4; //头像
+  required int32 level = 5;   //vip 等级
+}

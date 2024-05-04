@@ -1,0 +1,451 @@
+syntax = "proto2";
+package com.ttg.gamecore.proto;
+option java_package = "com.ttg.gamecore.proto";
+option java_outer_classname = "BcGame";
+//import "file/GameBase.proto";
+option java_multiple_files = true;
+
+enum BcGameType {
+  //Crash game 每次结束后10s结束动画时间 7s开始倒计时时间
+  ReqCrashBetType = 5000;         //crash押注请求
+  ResCrashBetType = 5001;         //crash押注回应
+  ReqCrashCashOutType = 5002;     //crash取现请求
+  ResCrashCashOutType = 5003;     //crash取现回应
+  NotifyCrashEnterType = 5070;     //crash 进入请求
+  NotifyCrashStartType = 5071;    //crash 开始通知（可以压当期）
+  NotifyCrashGamingType = 5072;    //crash 开始通知（可以压当期）
+  NotifyCrashFinishType = 5073;    //crash 结束通知（结算）
+  NotifyCrashUpdateType = 5074;   //crash 更新通知（游戏期间每秒通知）
+
+
+  //classic dice 99/payout=win chance(max=98)
+  ReqClassicDiceChooseType = 5100;      //设置押注参数请求
+  ResClassicDiceChooseType = 5101;      //获取获取押注回应
+  ReqClassicDiceBetType = 5102;         //经典骰子押注请求
+  ResClassicDiceBetType = 5103;         //经典骰子押注回应
+  NotifyClassicDiceType = 5171;         //用户每秒更新通知
+  NotifyClassicDiceEnterType = 5172;    //用户进入通知
+
+
+  //dice 99/payout=win chance(max=98) 0-9799 9999
+  ReqDiceChooseType = 5200;             //设置押注请求
+  ResDiceChooseType = 5201;             //设置押注回应
+  ReqDiceBetType = 5202;                //押注请求
+  ResDiceBetType = 5203;                //押注回应
+  NotifyDiceEnterType = 5270;           //用户进入通知
+  NotifyDiceType = 5271;                //用户每秒更新通知
+
+
+  //hash dice 0-99999
+  ReqHashDiceChooseType = 5300;             //设置押注请求
+  ResHashDiceChooseType = 5301;             //设置押注回应
+  ReqHashDiceBetType = 5302;                //押注请求
+  ResHashDiceBetType = 5303;                //押注回应
+  NotifyHashDiceEnterType = 5370;           //用户进入通知
+  NotifyHashDiceType = 5371;                //用户每秒更新通知
+
+
+
+  //limbo 99/payout=win chance(max=98)
+  ReqLimboChooseType = 5400;             //设置押注请求
+  ResLimboChooseType = 5401;             //设置押注回应
+  ReqLimboBetType = 5402;                //押注请求
+  ResLimboBetType = 5403;                //押注回应
+  NotifyLimboEnterType = 5470;           //用户进入通知
+  NotifyLimboType = 5471;                //用户每秒更新通知
+
+
+  //keno 0-40 选 1-10位数字开奖
+  ReqKenoBetType = 5500;                //押注请求
+  ResKenoBetType = 5501;                //押注回应
+  NotifyKenoEnterType = 5570;           //用户进入通知
+  NotifyKenoType = 5571;                //用户每秒更新通知
+
+  //plinko
+  ReqPlinkoBetType = 5600;              //押注请求
+  ResPlinkoBetType = 5601;               //押注回应
+  NotifyPlinkoEnterType = 5670;         //进入通知
+  NotifyPlinkoType = 5671;              //每秒通知
+
+
+  //wheel
+  ReqWheelBetType = 5700;               //轮盘押注请求
+  ResWheelBetType = 5701;               //轮盘押注回应
+  NotifyWheelEnterType = 5770;          //轮盘进入通知
+  NotifyWheelType = 5771;               //轮盘每秒通知
+
+}
+
+
+//--------------- Crash
+enum CrashStatus {
+  Start = 0;    //开始状态 （押注状态 7s）
+  Gaming = 1;   //游戏状态 （游戏开始，倍率改变）
+  Settle = 2;   //结束状态 （游戏结束 10s结束动画）
+}
+
+enum BetBall {
+  Red = 1;      //红 < 2
+  Green = 2;    //绿 2-10
+  Golden = 3;   //金 > 10
+}
+
+//押注请求
+message CrashBetReq {
+  required string amount = 1;   //押注金额
+  optional int32 ball = 2;      //是否压球颜色
+}
+
+//押注回应
+message CrashBetRes {
+  required string issue = 1;    //期号
+  required string amount = 2;   //押注金额
+  optional int32 ball = 3;      //是否压球颜色
+  required string balance = 4;  //余额
+}
+
+//兑现请求
+message CrashCashOutReq {
+//  required string rate = 1;     //取现的倍率
+}
+
+//兑现请求
+message CrashCashOutRes {
+  required string rate = 1;     //取现倍率
+  required string amount = 2;   //取现金额
+  required string score = 3;    //最新金额
+}
+
+
+message CrashHistory {
+  required string issue = 1;    //期号
+  required string rate = 2;     //结束倍率
+}
+
+message CrashEnterNotify {
+  required int32 status = 1;              //crash 状态 对应 CrashStatus
+  repeated CrashHistory historyList = 2;  //历史开奖记录
+  optional int32 interval = 3;            //当前状态剩余时间 (结束动画时间/开始倒计时），游戏状态不存在
+  optional string rate = 4;               //游戏状态下当前的倍率
+  optional string issue = 5;              //当前游戏期号
+  required string balance = 6;             //用户余额
+}
+
+//crash 游戏开始（切换到游戏状态）
+message CrashStartNotify {
+  required string issue = 1;              //期号
+  optional int64 startTimestamp = 2;       //更改时间
+  optional int32 interval = 3;            //倒计时时长
+}
+
+//crash 游戏开始（切换到游戏状态）
+message CrashGamingNotify {
+  required string issue = 1;              //期号
+}
+
+
+message CrashWinner {
+  required int32 uid = 1;       //用户id
+  required string name = 2;     //用户名
+  required string amount = 3;   //押注金额
+  required string cashRate = 4; //取现倍率
+  required string profit = 5;   //赢取金钱
+}
+
+//crash 结束通知（告诉所有用户结束的通知）
+message CrashFinishNotify {
+  required string rate = 1;           //结束时的倍率
+  repeated CrashWinner winners = 2;   //玩家赢取信息
+  optional int64 startTimestamp = 3;       //更改时间
+  optional int32 interval = 4;            //倒计时时长
+}
+
+
+//更新期间通知
+message CrashUpdateNotify {
+  required string rate = 1;           //结束时的倍率
+  repeated CrashWinner winners = 2;   //玩家赢取信息 增量(cashout 用户)
+  optional int64 startTimestamp = 3;       //更改时间
+  optional int64 timestampInterval = 4;     //开始游戏后的毫秒计时
+}
+
+
+
+//-------------classic dice // 99相除
+//通过其中一个请求获取到另一个
+message ClassicDiceChooseReq {
+  optional int32 winChance = 1;   //赢取概率
+  optional string payOut = 2;     //获取的payout
+}
+
+message ClassicDiceChooseRes {
+  required string winChance = 1;   //赢取概率
+  required string payOut = 2;     //获取的payout
+}
+
+message ClassicDiceBetReq {
+  optional string betAmount = 1;     //押注金额
+  optional int32 winChance = 2;   //赢取概率
+  optional string payOut = 3;     //获取的payout
+//  optional bool in = 4;           //TODO 是否 里面的
+}
+
+message ClassicDiceBetRes {
+  required string betAmount = 1;    //下注金额
+  required string random = 2;       //随机数值
+  required bool win = 3;            //是否赢
+  optional string winAmount = 4;    //赢取金额
+  optional string balance = 5;      //最终金额
+  optional string payOut = 6;       //获取的payout
+}
+
+message ClassicDiceEnterNotify {
+  required string balance = 1;      //用户余额
+  required string payOut = 2;         //默认rate
+  required string winChance = 3;    //默认赢率
+}
+
+message BetInfo {
+  required int32 uid = 1;       //用户id
+  required string serialId = 2; //流水号
+  required string name = 3;     //用户名
+  required string payout = 4;   //payout
+  required string profile = 5;  //盈利
+}
+
+message ClassicDiceNotify {
+  repeated BetInfo bets = 1;    //押注列表
+}
+
+
+
+//---------------------dice
+//通过其中一个请求获取到另一个
+message DiceChooseReq {
+  optional int32 winChance = 1;   //赢取概率
+  optional string payOut = 2;     //获取的payout
+  optional bool in = 3;           //TODO 是否 里面的
+  optional int32 min = 5;           //最小
+  optional int32 max = 6;           //最大
+}
+
+message DiceChooseRes {
+  required string winChance = 1;   //赢取概率
+  required string payOut = 2;     //获取的payout
+  optional int32  min = 3;        //最小值
+  optional int32 max = 4;         //最大值
+}
+
+message DiceBetReq {
+  optional string betAmount = 1;     //押注金额
+  optional int32 winChance = 2;   //赢取概率
+  optional string payOut = 3;     //获取的payout
+  optional bool in = 4;           //TODO 是否 里面的
+  optional int32 min = 5;           //最小
+  optional int32 max = 6;           //最大
+}
+
+message DiceBetRes {
+  required string betAmount = 1;    //下注金额
+  required int32 random = 2;       //随机数值
+  required bool win = 3;            //是否赢
+  optional string winAmount = 4;    //赢取金额
+  optional string balance = 5;      //最终金额
+  optional string winChance = 6;   //赢取概率
+  optional string payOut = 7;     //获取的payout
+  optional int32 min = 8;       //最小值
+  optional int32 max = 9;       //最大值
+  optional bool  in = 10;          //是否随机里面的数字
+}
+
+message DiceEnterNotify {
+  required string balance = 1;      //用户余额
+  required string payOut = 2;         //默认rate
+  required string winChance = 3;    //默认赢率
+}
+
+message DiceNotify {
+  repeated BetInfo bets = 1;    //押注列表
+}
+
+
+
+//---------------------hash dice
+//通过其中一个请求获取到另一个
+message HashDiceChooseReq {
+  optional int32 winChance = 1;   //赢取概率
+  optional string payOut = 2;     //获取的payout
+  optional bool high = 3;         //如果位true表示大于赢 否则小于赢
+}
+
+message HashDiceChooseRes {
+  required string winChance = 1;   //赢取概率
+  required string payOut = 2;     //获取的payout
+  optional bool high = 3;         //如果位true表示大于赢 否则小于赢
+  optional int32 offset = 4;      // (偏移量 < offset )赢 或者( > 99999-offset) 与high一起使用
+}
+
+message HashDiceBetReq {
+  optional string betAmount = 1;     //押注金额
+  optional int32 winChance = 2;   //赢取概率
+  optional string payOut = 3;     //获取的payout
+  optional bool high = 4;         //如果位true表示大于赢 否则小于赢
+}
+
+message HashDiceBetRes {
+  required string betAmount = 1;    //下注金额
+  required int32 random = 2;       //随机数值
+  required bool win = 3;            //是否赢
+  optional string winAmount = 4;    //赢取金额
+  optional string balance = 5;      //最终金额
+  optional int32 winChance = 6;   //赢取概率
+  optional string payOut = 7;     //获取的payout
+}
+
+message HashDiceEnterNotify {
+  required string balance = 1;      //用户余额
+  required string payOut = 2;         //默认rate
+  required string winChance = 3;    //默认赢率
+}
+
+message HashDiceNotify {
+  repeated BetInfo bets = 1;    //押注列表
+}
+
+
+
+//-----------limbo
+message LimboChooseReq {
+  optional int32 winChance = 1;   //赢取概率
+  optional string payOut = 2;     //获取的payout
+}
+
+message LimboChooseRes {
+  required string winChance = 1;   //赢取概率
+  required string payOut = 2;     //获取的payout
+}
+
+message LimboBetReq {
+  optional string betAmount = 1;     //押注金额
+  optional int32 winChance = 2;   //赢取概率
+  optional string payOut = 3;     //获取的payout
+}
+
+message LimboBetRes {
+  required string betAmount = 1;    //下注金额
+  required string random = 2;       //随机数值
+  required bool win = 3;            //是否赢
+  optional string winAmount = 4;    //赢取金额
+  optional string balance = 5;      //最终金额
+  optional int32 winChance = 6;   //赢取概率
+  optional string payOut = 7;     //获取的payout
+}
+
+message LimboEnterNotify {
+  required string balance = 1;      //用户余额
+  required string payOut = 2;         //默认rate
+  required string winChance = 3;    //默认赢率
+}
+
+message LimboNotify {
+  repeated BetInfo bets = 1;    //押注列表
+}
+
+
+
+
+//-------------keno
+message KenoBetReq {
+  optional string betAmount = 1;     //押注金额
+  repeated int32 betNumbers = 2;     //押注数字
+}
+
+message KenoBetRes {
+  required string betAmount = 1;    //下注金额
+  repeated int32 random = 2;       //随机数值
+  required int32 matchCount = 3;    //匹配数字数量
+  optional string winAmount = 4;    //赢取金额
+  optional string balance = 5;      //最终金额
+}
+
+
+message BetRate {
+  required int32 chooseCount = 1;        //选择数字数量
+  repeated string rates = 2;             //猜中赢率值  第一个永远为0，列表中的数量从第1个开始
+}
+
+message KenoEnterNotify {
+  required string balance = 1;      //用户余额
+  repeated BetRate betRates = 2;    //进入时通知
+}
+
+message KenoNotify {
+  repeated BetInfo bets = 1;    //押注列表
+}
+
+
+
+
+//-------------Plinko
+message PlinkoBetReq {
+  required string betAmount = 1;     //押注金额
+  required int32 style = 2;          //下注类型 low1 middle2 high3
+  required int32 layer = 3;          //下注层级8-16
+}
+
+message PlinkoBetRes {
+  required string betAmount = 1;    //下注金额
+  required string random = 2;       //随机rate数值
+  required bool win = 3;            //是否赢
+  optional string winAmount = 4;    //赢取金额
+  optional string balance = 5;      //最终金额
+}
+
+message PlinkRateRange {
+  required int32 count = 1;         //层数
+  repeated string rates = 2;        //赔率
+}
+
+message PlinkoEnterNotify {
+  required string balance = 1;          //用户余额
+  repeated PlinkRateRange lowList = 2;  //层数赔率列表
+  repeated PlinkRateRange middleList = 3;  //层数赔率列表
+  repeated PlinkRateRange highList = 4;  //层数赔率列表
+}
+
+message PlinkoNotify {
+  repeated BetInfo bets = 1;    //押注列表
+}
+
+
+
+//-------------wheel
+message WheelBetReq {
+  required int32 style = 1;         //押注类型 low1 middle2 high3
+  required string betAmount = 2;     //押注金额
+  required int32 row = 3;           //押注row
+}
+
+message WheelBetRes {
+  required string betAmount = 1;    //下注金额
+  required string random = 2;       //随机数值
+  required bool win = 3;            //是否赢
+  optional string winAmount = 4;    //赢取金额
+  optional string balance = 5;      //最终金额
+  required int32  style = 6;        //押注类型 low1 middle2 high3
+}
+
+message WheelRates {
+  required int32 style = 1;     //low1 middle2 high3
+  repeated string rates = 2;    //赔率列表
+  required int32 row = 3;       //TODO style row对应相关的rates
+}
+
+message WheelEnterNotify {
+  required string balance = 1;          //用户余额
+  repeated WheelRates wheelRates = 2;   //赔率列表
+}
+
+message WheelNotify {
+  repeated BetInfo bets = 1;    //押注列表
+}

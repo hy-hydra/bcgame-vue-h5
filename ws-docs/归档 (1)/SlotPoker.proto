@@ -1,0 +1,99 @@
+syntax = "proto2";
+package com.ttg.gamecore.proto;
+option java_package = "com.ttg.gamecore.proto";
+option java_outer_classname = "SlotPoker";
+import "file/GameBase.proto";
+option java_multiple_files = true;
+
+//消息的请求回应
+enum PokerType {
+  //  poker 扑克
+  ReqPokerStartType = 4000;       //扑克开始游戏请求
+  ResPokerStartType = 4001;       //扑克开始游戏回应
+  ReqPokerChooseType = 4002;      //扑克选择 大0小1 等于2 跳过3 请求
+  ResPokerChooseType = 4003;      //扑克选择回应
+  ReqPokerCashOutType = 4004;     //扑克兑现请求
+  ResPokerCashOutType = 4005;     //扑克兑现回应
+  ReqPokerJackpotType = 4006;     //扑克奖信息请求
+  ResPokerJackpotType = 4007;     //扑克奖信息回应
+  ReqPokerRankType = 4008;     //扑克排名信息请求
+  ResPokerRankType = 4009;     //扑克排名信息回应
+  ReqPokerBetChooseType = 4010;    //扑克选择押注请求 (只有开始前能请求)
+  ResPokerBetChooseType = 4011;    //扑克选择押注回应
+
+
+//  NotifyPokerStartType = 4070;   //扑克开始通知
+  NotifyPokerJackpotType = 4071;  //扑克总奖池通知
+  NotifyPokerEnterType = 4073;    //扑克进入场景通知
+}
+
+//选择下注额度
+message PokerBetChooseReq {
+  required int32 idx = 1;       //下注额度下标
+}
+
+message PokerBetChooseRes {
+  required int32 idx = 1;             //下注额度下标
+  required string betAmount = 2;       //下注额度
+}
+
+//开始请求
+message PokerStartReq {
+
+}
+
+message PokerStartRes {
+  required Poker poker = 1;             //第一个扑克
+  required string score = 3;            //积分
+  required string winScore = 4;         //赢取积分
+  required string winRate = 5;          //赢取系数
+
+  optional string bigRate = 6;  //大赢率
+  optional string minRate = 7;  //小赢率
+  optional string equalRate = 8; //相等赢率
+}
+
+enum PokerChoose {
+  Big = 1;    //大
+  Small = 2;//小
+  Equal = 3;//等于
+  Jump = 4;//跳过
+}
+
+message PokerChooseReq {
+  required int32 choose = 1;        //对应枚举 PokerChoose 大小 等于跳过
+}
+
+message PokerChooseRes {
+  required Poker poker = 1;        //开的扑克
+  required bool  finish = 2;      //是否结束 猜错的情况下为true结束，开始下一局
+  required string score = 3;      //新积分
+  required string winScore = 4;   //赢取积分
+  required string winRate = 5;    //赢取系数
+}
+
+//扑克兑换请求
+message PokerCashOutReq {
+
+}
+
+//兑换回应，拿到这个所有游戏对局数据清零
+message PokerCashOutRes {
+  required string score = 1;    //新的积分
+  optional string bigRate = 2;  //大赢率
+  optional string minRate = 3;  //小赢率
+  optional string equalRate = 4; //相等赢率
+}
+
+
+message PokerJackpotNotify {
+  required string jackpotAmount  = 2;   //奖池金额
+}
+
+message PokerEnterNotify {
+  required string jackpotAmount = 1;    //奖池奖金
+  repeated string betsAmount = 2;       //押注数值列表
+  required string score = 3;            //积分
+  required string winScore = 4;         //赢取积分
+  required string winRate = 5;          //赢取系数
+}
