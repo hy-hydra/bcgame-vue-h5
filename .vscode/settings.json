@@ -1,0 +1,102 @@
+{
+  // "editor.codeActionsOnSave": { "source.fixAll.eslint": "explicit" },
+  // "editor.defaultFormatter": "octref.vetur",
+  // "editor.rename.enablePreview": false,
+  "editor.formatOnSave": false,
+
+  "vetur.format.options.tabSize": 4,
+  "vetur.format.defaultFormatterOptions": {
+    "prettier": {
+      "singleQuote": true,
+      "semi": false,
+      "arrowParens": "always",
+      "useTabs": false,
+      "trailingComma": "none"
+    }
+  },
+  "vetur.grammar.customBlocks": {
+    "docs": "md",
+    "i18n": "json"
+  },
+
+  "i18n-ally.localesPaths": [
+    // 多语言文件索引
+    "src/locale/lang"
+  ],
+
+  "i18n-ally.translate.engines": [
+    // 自动翻译以哪些翻译API为基准
+    "google",
+    "google-cn"
+  ],
+
+  "i18n-ally.keystyle": "nested", // 翻译后的文件格式 nested: 嵌套格式 flat: 平铺格式
+
+  "i18n-ally.namespace": true, // 启用了命名空间，这样不同部分的翻译可以使用相同的键名而不会冲突。
+
+  "i18n-ally.enabledParsers": [
+    // 启用i18n-ally对哪些文件进行支持
+
+    "json",
+
+    "js",
+
+    "ts"
+  ],
+
+  "i18n-ally.sortKeys": true, // 启用键名排序，以确保翻译文件的键名有序。
+
+  "i18n-ally.sourceLanguage": "en-US", // 根据此语言文件翻译其他语言文件的变量和内容
+
+  "i18n-ally.displayLanguage": "en-US", // 在vue文件显示的语言
+
+  "i18n-ally.extract.keygenStyle": "snake_case", // 键生成的样式。此次采用了蛇形命名。
+
+  "i18n-ally.theme.annotationMissing": "#9bc3ff", // 缺失翻译键值后的提示样式
+
+  "i18n-ally.theme.annotationMissingBorder": "#9bc3ff",
+
+  "i18n-ally.theme.annotation": "#6666be", // 注释文本的颜色
+
+  "i18n-ally.theme.annotationBorder": "#30B08F",
+
+  "i18n-ally.extract.autoDetect": false, // 注释文本的边框颜色
+
+  "i18n-ally.extract.parsers.html": {
+    "attributes": [
+      // H5 根据vant组件做更细致的配置
+      "text",
+      "title",
+      "alt",
+      "placeholder",
+      "label",
+      "aria-label",
+      "picker-options",
+      "range-separator",
+      "start-placeholder",
+      "end-placeholder",
+      "element-loading-text"
+    ],
+    "ignoredTags": ["script", "style"],
+    "vBind": true,
+    "inlineText": true
+  },
+  "i18n-ally.extract.ignoredByFiles": {
+    "src\\views\\regist\\index.vue": [
+      "Edge",
+      "Firefox",
+      "Chrome",
+      "Safari",
+      "Vulnerable"
+    ]
+  },
+  "[vue]": {
+    // "editor.defaultFormatter": "Vue.volar"
+  },
+  "[javascript]": {
+    // "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

@@ -1,0 +1,77 @@
+syntax = "proto2";
+package com.ttg.gamecore.proto;
+option java_package = "com.ttg.gamecore.proto";
+option java_outer_classname = "GameBase";
+//import "file/Base.proto";
+option java_multiple_files = true;
+
+
+//消息的请求回应
+enum GameType {
+  ReqEnterGameType = 2000;  //进入请求
+  ReqLeaveGameType = 2001;  //离开请求
+
+  ResEnterGameType = 2100;  //进入回应
+  ResLeaveGameType = 2101;  //离开回应
+
+  NotifyEnterGameType = 2200;  //进入通知
+  NotifyLeaveGameType = 2201;  //离开通知
+}
+
+
+enum PokerColour {
+  Spade = 0;   //黑桃
+  Heart = 1;    //红桃
+  Diamond = 2;  //方片
+  Club = 3;     //梅花
+}
+
+//从A开始的游戏扑克值
+enum PokerAValue {
+  AA = 0;
+  AOne = 1;
+  ATwo = 2;
+  AThree = 3;
+  AFour = 4;
+  AFive = 5;
+  ASix =6;
+  ASeven = 7;
+  AEight = 8;
+  ANine = 9;
+  ATen = 10;
+  AJ = 11;
+  AQ = 12;
+  AK = 13;
+  ASK = 14;//小王
+  ABK = 15;//大王
+}
+
+message Poker {
+  required int32 colour = 1;
+  required int32 value = 2;
+}
+
+
+message EnterGameReq {
+  required int32 gameId = 1;  //游戏id
+}
+message EnterGameRes {
+  optional int32 gameId = 2;  //游戏id
+}
+message EnterGameNotify {
+
+}
+
+
+
+message LeaveGameReq {
+
+}
+
+message LeaveGameRes {
+
+}
+
+message LeaveGameNotify {
+
+}

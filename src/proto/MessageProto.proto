@@ -1,0 +1,88 @@
+syntax = "proto2";
+package com.ttg.gamecore.proto;
+option java_package = "com.ttg.gamecore.proto";
+option java_outer_classname = "MessageProto";
+import "file/Base.proto";
+option java_multiple_files = true;
+
+
+//消息的请求回应通知
+enum MessageType {
+  ReqDefault = 0;            //默认
+  ReqMessageType = 1000;
+  ReqSubTopicType = 1001;   //请求订阅主题
+  ResSubTopicType = 1002;   //请求订阅主题
+  ReqLoginType = 1003;      //登陆请求
+  ResLoginType = 1004;      //登陆回应
+
+  ResMessageType = 1300;
+
+  NotifyMessageType = 1700;
+}
+
+message Winner {
+  required People people = 1;   //赢家
+  required int32 coinType = 2;  //货币类型
+  required string amount = 3;   //赢取金币
+}
+
+enum MessageEnum {
+  EMEefault = 0;//默认
+  EMText = 1;   //文字消息
+  EMPhoto = 2;  //图片消息
+  EMLink = 3;   //链接消息
+  EMRank = 4;   //排名提示
+}
+
+//enum NotifyEnum {
+//  ENAll = 0;      //所有聊天室
+//  ENChannel = 1;  //聊天室
+//  ENPeople = 2;   //单个用户
+//}
+
+message Game {
+  required int32 code = 1;  //游戏代码
+  required string name = 2; //游戏名
+}
+
+message GameWin {
+  required string title = 1;       //congratulations
+  required Game game = 2;           //游戏信息
+  required Winner biggest = 3;      //赢家
+  required Winner winnerList = 4;   //赢家列表
+}
+
+
+//消息请求体
+message ReqMessage {
+  required int32 channelId = 1; //聊天室id
+  required int32 msgType = 2;  //消息类型 MessageEnum
+  optional string content = 3;  //消息内容
+  optional GameWin win = 4;     //游戏赢家推送消息
+//  required People sender = 3;   //消息发送者
+}
+
+
+//消息通知体
+message NotifyMessage {
+//  required NotifyEnum notify = 1;   //通知类型
+//  optional int32 notifyId = 2;      //通知具体的用户 NotifyEnum=NChannel 通知指定聊天室 NChannel=NPeople 通知指定用户
+  required int32 msgType = 1;     //消息类型 MessageEnum
+  optional string content = 2;      //消息内容
+  optional GameWin win = 3;         //游戏赢家推送消息
+}
+
+
+
+message LoginReq {
+  required string token = 1;        //登陆后的token
+}
+
+message LoginRes {
+  required int64 uid = 1;          //登陆后的token
+  required string token = 2;          //token
+  required string merchant = 3;      //站点
+  required int64 rootId = 4;         //用户rootId
+  required int64 agentRootId = 5;      //代理rootId
+//  required string balance = 4;      //余额
+}

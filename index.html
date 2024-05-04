@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dark>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="The template for Vue3 Vant Mobile" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover, user-scalable=no"
+    />
+    <style>
+      @keyframes up-down {
+        0% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-20px) scale(1);
+        }
+        100% {
+          transform: translateY(0) scale(1);
+        }
+      }
+      #app {
+        font-family: Montserrat, -apple-system, BlinkMacSystemFont, PingFang SC,
+          Microsoft Yahei, sans-serif;
+        color: #98a7b5;
+        height: 100vh;
+        background-color: #24262b;
+      }
+
+      body {
+        margin: 0px;
+      }
+      #app .loading-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+      }
+      #app .loading-wrap .loading-img {
+        width: 214px;
+        height: 214px;
+        animation: up-down 3s linear infinite;
+      }
+      @font-face {
+        font-family: Montserrat;
+        src: url("https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2")
+          format("truetype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      ::placeholder {
+        color: red; /* 您希望的颜色 */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="loading-wrap">
+        <img src="/d3.png" alt="" class="loading-img" />
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

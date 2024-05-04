@@ -1,0 +1,153 @@
+
+h_bag_atlas_symbols.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fx_sparkle
+  rotate: false
+  xy: 183, 15
+  size: 16, 16
+  orig: 18, 18
+  offset: 1, 1
+  index: -1
+h_cp_coins_L
+  rotate: true
+  xy: 543, 26
+  size: 89, 50
+  orig: 95, 56
+  offset: 3, 3
+  index: -1
+h_cp_coins_R_01
+  rotate: true
+  xy: 388, 3
+  size: 83, 47
+  orig: 89, 53
+  offset: 3, 3
+  index: -1
+h_cp_coins_R_02
+  rotate: true
+  xy: 437, 3
+  size: 83, 43
+  orig: 84, 43
+  offset: 0, 0
+  index: -1
+h_cp_coins_Top
+  rotate: true
+  xy: 482, 4
+  size: 82, 59
+  orig: 88, 65
+  offset: 3, 3
+  index: -1
+h_cp_pouch_Bot
+  rotate: true
+  xy: 388, 88
+  size: 166, 134
+  orig: 166, 143
+  offset: 0, 2
+  index: -1
+h_cp_pouch_Top_B
+  rotate: true
+  xy: 593, 117
+  size: 137, 47
+  orig: 137, 48
+  offset: 0, 0
+  index: -1
+h_cp_pouch_Top_F
+  rotate: true
+  xy: 524, 117
+  size: 137, 67
+  orig: 137, 71
+  offset: 0, 2
+  index: -1
+h_cp_rope_ring
+  rotate: true
+  xy: 595, 30
+  size: 85, 30
+  orig: 85, 34
+  offset: 0, 2
+  index: -1
+h_cp_rope_ring_mid
+  rotate: false
+  xy: 168, 14
+  size: 13, 17
+  orig: 18, 19
+  offset: 2, 1
+  index: -1
+h_cp_sha
+  rotate: false
+  xy: 2, 33
+  size: 191, 221
+  orig: 198, 224
+  offset: 6, 2
+  index: -1
+h_cp_sha_mg
+  rotate: false
+  xy: 195, 33
+  size: 191, 221
+  orig: 198, 224
+  offset: 6, 2
+  index: -1
+h_cp_trinket_L_01
+  rotate: true
+  xy: 95, 7
+  size: 24, 22
+  orig: 29, 27
+  offset: 2, 3
+  index: -1
+h_cp_trinket_L_02
+  rotate: false
+  xy: 2, 2
+  size: 37, 29
+  orig: 40, 32
+  offset: 1, 1
+  index: -1
+h_cp_trinket_L_03
+  rotate: false
+  xy: 41, 5
+  size: 26, 26
+  orig: 30, 29
+  offset: 2, 1
+  index: -1
+h_cp_trinket_R_01
+  rotate: false
+  xy: 119, 8
+  size: 23, 23
+  orig: 28, 27
+  offset: 3, 2
+  index: -1
+h_cp_trinket_R_02
+  rotate: true
+  xy: 627, 44
+  size: 33, 31
+  orig: 38, 34
+  offset: 3, 1
+  index: -1
+h_cp_trinket_R_03
+  rotate: false
+  xy: 144, 8
+  size: 22, 23
+  orig: 26, 26
+  offset: 3, 1
+  index: -1
+h_cp_trinket_bodymid
+  rotate: true
+  xy: 69, 6
+  size: 25, 24
+  orig: 30, 30
+  offset: 3, 3
+  index: -1
+h_cp_trinket_link
+  rotate: true
+  xy: 168, 2
+  size: 10, 8
+  orig: 10, 8
+  offset: 0, 0
+  index: -1
+h_cp_trinket_tailend
+  rotate: false
+  xy: 627, 79
+  size: 32, 36
+  orig: 34, 43
+  offset: 1, 2
+  index: -1

@@ -1,0 +1,118 @@
+syntax = "proto2";
+package com.ttg.gamecore.proto;
+option java_package = "com.ttg.gamecore.proto";
+option java_outer_classname = "Slot";
+//import "file/Base.proto";
+//import "file/GameBase.proto";
+option java_multiple_files = true;
+
+
+//消息的请求回应
+enum SlotType {
+  //扫雷
+  ReqChangeBombType = 3000;     //更改地雷数
+  ResChangeBombType = 3001;     //更改地雷数
+
+  ReqChangeType = 3002;       //更改地雷数/押注倍数请求 只有开始前操作
+  ResChangeType = 3003;       //更改地雷数/押注倍数回应
+  ReqChooseType = 3004;       //选择格子请求 开始后才可以操作
+  ResChooseType = 3005;       //选择格子回应
+  ReqMinesJackPotType = 3006; //jackpot列表请求
+  ResMinesJackPotType = 3007; //jackpot列表回应
+  ReqMinesStartType = 3008;        //开始请求
+  ResMinesStartType = 3009;        //开始回应
+  ReqMinesCashOutType = 3010;      //兑现操作请求
+  ResMinesCashOutType = 3020;      //兑现操作回应
+  NotifyEnterMinesType = 3070;  //进入扫雷通知
+  NotifyMinesType = 3071;       //扫雷奖池通知
+
+
+}
+
+//进入扫雷通知
+message EnterMinesNotify {
+  required int32 wight = 1; //长格子数量
+  required int32 height = 2;//宽格子数量
+  required int32 bombNumber = 3;//地雷数
+  repeated string odds = 4;   //赔率列表
+
+  required string score = 5;   //用户积分 余额
+  required string winScore = 6;//赢分
+
+
+//  required int32 bombChoose = 7;//可选的地雷数 2-24
+  repeated string betAmount = 7; //可选的押注列表
+
+  required string jackpotAmount = 8;//联机奖池
+}
+
+//更改地雷数
+message ChangeReq {
+  optional int32 boomCount = 1; //更改地雷数
+  optional int32 nBetIdx = 2; //更改的押注余额坐标
+}
+
+message ChangeRes {
+  required int32 bombNumber = 1; //更改的地雷数
+  required int32 betAmount = 2; //更改的下注金额
+  repeated string odds = 3;   //新赔率列表
+
+  required string score = 4;   //用户积分 余额
+  required string winScore = 5;//赢分
+  required int32 code = 6;    //更改状态
+}
+
+message ChooseReq {
+  required int32 x = 1;   //横向坐标
+  required int32 y = 2;   //纵向坐标
+}
+
+message ChooseRes {
+  required int32 coinNumber = 1;//剩余金币数量
+  required int32 bombNumber = 2;//地雷数
+  required int32 nOddsIdx = 3;   //当前赔率坐标
+
+  required string score = 4;   //用户积分 余额
+  required string winScore = 5;//赢分
+  required bool boom = 6;     //当前是否地雷 为地雷则清分，重新开启
+}
+
+message MinesJackpotReq {
+
+}
+
+message MinesRanker {
+  required int32 grade = 1; //排名等级
+  required string date = 2;//排名时间
+  required string winner = 3;//赢家
+  required string coin = 4;//积分
+}
+
+message MinesJackpotRes {
+  required string jackpotAmount = 1;//积分
+  repeated MinesRanker winners = 2; //排名赢家
+}
+
+message MinesNotify {
+  optional string jackpotAmount = 1;  //联机奖池
+}
+
+
+message MinesStartReq {
+
+}
+
+message MinesStartRes {
+  required int32 code = 1; //1 成功 2失败
+}
+
+message MinesCashOutReq {
+
+}
+
+message MinesCashOutRes {
+  required int32 code = 1; //1 成功 2失败
+}
+
+
+//自动押注要不要做

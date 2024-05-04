@@ -1,0 +1,41 @@
+syntax = "proto2";
+package com.ttg.gamecore.proto;
+option java_package = "com.ttg.gamecore.proto";
+option java_outer_classname = "PgGame";
+//import "file/GameBase.proto";
+option java_multiple_files = true;
+
+
+enum PgGameType {
+  //pg 游戏id 牛:12004 兔子:12003 老虎:12007 老鼠:12005
+  ReqPgBetType = 6000;     //pg电子押注请求
+  ResPgBetType = 6001;     //pg电子押注回应
+
+  NotifyEnterPgType = 6070; //pg电子进入通知
+  NotifyPgType = 6071;      //pg电子每秒通知
+}
+
+
+message PgCell {
+  required int32 x = 1;         //行 0开始
+  required int32 y = 2;         //列 0开始
+  required int32 icon = 3;      //图标 0开始 对标文档中的1
+}
+
+message PgGameEnterNtf {
+  required int32 gameCode = 1;      //游戏id
+  required string balance = 2;      //余额
+  repeated PgCell cells = 3;        //游戏初始列表
+}
+
+message PgBetReq {
+  required string betAmount = 1;    //押注金额
+}
+
+message PgBetRes {
+  repeated PgCell cells = 1;        //游戏图标列表
+  required string balance = 2;      //最新余额
+  repeated string winLines = 3;     //领取线路 比如成线 0_0_0 成线 0_1_0 等
+  optional string winRate = 4;      //赢取倍数
+  optional string winAmount = 5;    //赢取金额
+}
